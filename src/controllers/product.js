@@ -18,13 +18,13 @@
 
   try {
 
-  //   verifyToken(req, res, () => {
-  //     jwt.verify(req.token, options.secretKey,(err,authData)=>{
-  //      if(err){
-  //       return res.status(401).json({ error: 'Invalid Token' });
-  //     }
-  //     })
-  //  });
+    verifyToken(req, res, () => {
+      jwt.verify(req.token, options.secretKey,(err,authData)=>{
+       if(err){
+        return res.status(401).json({ error: 'Invalid Token' });
+      }
+      })
+   });
 
     let filter = {};
     const currentPage = req.query.currentPage || '1';
@@ -136,13 +136,13 @@ exports.getFilteredProduct = wrapper(async (req, res,next) => {
 
   try {
 
-  //   verifyToken(req, res, () => {
-  //     jwt.verify(req.token, options.secretKey,(err,authData)=>{
-  //      if(err){
-  //       return res.status(401).json({ error: 'Invalid Token' });
-  //     }
-  //     })
-  //  });
+    verifyToken(req, res, () => {
+      jwt.verify(req.token, options.secretKey,(err,authData)=>{
+       if(err){
+        return res.status(401).json({ error: 'Invalid Token' });
+      }
+      })
+   });
 
     let filter = {};
     if(!!req.body.productFilter){

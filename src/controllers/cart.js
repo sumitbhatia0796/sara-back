@@ -18,16 +18,16 @@
 
   try {
 
-    // verifyToken(req, res, () => {
-    //     jwt.verify(req.token, options.secretKey,(err,authData)=>{
-    //         if (err) {
-    //             // Sending an error response when token is invalid
-    //             return res.status(401).json({ error: 'Invalid Token' });
-    //           }
-    //     })
-    //  });
+    verifyToken(req, res, () => {
+        jwt.verify(req.token, options.secretKey,(err,authData)=>{
+            if (err) {
+                // Sending an error response when token is invalid
+                return res.status(401).json({ error: 'Invalid Token' });
+              }
+        })
+     });
 
-    
+
     let filter = {};
     const currentPage = req.query.currentPage || '1';
     const pageSize = req.query.pageSize || '50';
@@ -53,14 +53,14 @@
 exports.addProductInCart = wrapper(async (req, res,next) => {
   try {
 
-    // verifyToken(req, res, () => {
-    //     jwt.verify(req.token, options.secretKey,(err,authData)=>{
-    //         if (err) {
-    //             // Sending an error response when token is invalid
-    //             return res.status(401).json({ error: 'Invalid Token' });
-    //           }
-    //     })
-    //  });
+    verifyToken(req, res, () => {
+        jwt.verify(req.token, options.secretKey,(err,authData)=>{
+            if (err) {
+                // Sending an error response when token is invalid
+                return res.status(401).json({ error: 'Invalid Token' });
+              }
+        })
+     });
     const {
         productName,price,quantitySelected,image,brand,productId,productDetailId,userId
     } = req.body; // Use the User model to create a new user object
@@ -122,13 +122,13 @@ exports.updateProductInCartById = wrapper(async (req, res, next) => {
 exports.deleteProductInCartById = wrapper(async (req, res, next) => {
   try {
 
-    // verifyToken(req, res, () => {
-    //     jwt.verify(req.token, options.secretKey,(err,authData)=>{
-    //      if(err){
-    //        res.send("Invalid Token")
-    //      }
-    //     })
-    //  });
+    verifyToken(req, res, () => {
+        jwt.verify(req.token, options.secretKey,(err,authData)=>{
+         if(err){
+           res.send("Invalid Token")
+         }
+        })
+     });
     const cartSelectedId = req?.params?.cartId;
     const cart = await Cart.deleteOne({cartId: cartSelectedId});
 

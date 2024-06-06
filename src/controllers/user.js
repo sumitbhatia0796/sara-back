@@ -75,7 +75,7 @@ exports.addUser = wrapper(async (req, res) => {
     await user.save(); // Wait for the user to be saved to the database
     res.status(201).send(user); // Send the saved user object as the response with status 201 (Created)
 
-    // sendMail(email,"Welcome To Our Website", `Hi, ${firstName} ${lastName}! Thanks For Registration!`);
+     sendMail(email,"Welcome To Our Website", `Hi, ${firstName} ${lastName}! Thanks For Registration!`);
   } catch (err) {
     throw boom.boomify(err);
   }
@@ -172,7 +172,7 @@ exports.loginUser = wrapper(async (req, res, next) => {
       token: token,
       name: name
     });
-   // sendMail(user?.email,"New Login Detected", `Hi, ${name}  review your login info`)
+    sendMail(user?.email,"New Login Detected", `Hi, ${name}  review your login info`)
 
   } catch (err) {
     return next(err);
