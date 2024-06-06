@@ -24,16 +24,22 @@ const PORT = options.port;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
-app.use(cors({
-  origin: 'https://www.sarafurniture.info', // Replace with your frontend domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+const corsOptions = {
+  origin: 'https://www.sarafurniture.info', // Allow only your domain
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  allowedHeaders: 'Content-Type,Authorization'
+};
+app.use(cors(corsOptions));
+
 if (process.env.NODE_ENV === 'development') {
   app.use(require('morgan')('dev'));
 }
-
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 app.use(helmet());
 
 // Serve static files
