@@ -30,6 +30,7 @@ const corsOptions = {
   allowedHeaders: 'Content-Type,Authorization'
 };
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 if (process.env.NODE_ENV === 'development') {
   app.use(require('morgan')('dev'));
@@ -58,6 +59,11 @@ initialize({
     Bearer: verifyToken
   }
 })
+app.use((req, res, next) => {
+  console.log(`Request received: ${req.method} ${req.url}`);
+  console.log('Headers:', req.headers);
+  next();
+});
 
 app.use((err, req, res, next) => {
   console.error(err); // Log the error for debugging purposes
